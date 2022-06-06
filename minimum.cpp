@@ -1,68 +1,81 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int lista[L], minPorBlok[L];
-int valueIni[L], valueFin[L], posGroup[L];
+int maxn = 1e5 + 5;
+int lista[maxn], minPorBlok[maxn];
+int valueIni[maxn], valueFin[maxn], posGroup[maxn];
+int oo = maxn;
+int rootList;
 
-void build(){
-    int index = 1;
-    valueIni[index] = 1;
-    minPorBlok[index] = oo;
-    for(int i = 1; i <= L; i++)
-    {
-        minPorBlok[index] = min(minPorBlok[index], lista[i]);
-        posGroup[i] = index;
-        if(i % rootList == 0)
-        {
-            valueFin[index] = i;
-            index++;
-            valueIni[index] = i + 1;
-            minPorBlok[index] = oo;
-        }
-    }
-    valueFin[index] = L;
-    return;
-}
 int query(int ini, int fin){
-    int menor = oo;
-    int i = ini;
+Â  Â  int menor = oo;
+Â  Â  int i = ini;
     // recorre el primer grupo
-    while(posGroup[i] == posGroup[ini] && posGroup[i] != posGroup[fin])
+Â  Â  while(posGroup[i] == posGroup[ini] && posGroup[i] != posGroup[fin])
     {menor = min(menor, lista[i]); i ++;}
     // recorre los grupos intermedios
-    while(posGroup[i] != posGroup[fin])
+Â  Â  while(posGroup[i] != posGroup[fin])
     {menor = min(menor, minPorBlok[ posGroup[i] ]); i = ini[ posGroup[i] + 1 ]}
     // recorre el ultimo grupo
-    while(i <= fin)
+Â  Â  while(i <= fin)
     {menor = min(menor, lista[i]); i++;}
 
-    return menor;
+Â  Â  return menor;
+}
+void build(){
+Â  Â  int index = 1;
+Â  Â  valueIni[index] = 1;
+Â  Â  minPorBlok[index] = oo;
+Â  Â  for(int i = 1; i <= L; i++)
+    {
+Â  Â  Â  Â  minPorBlok[index] = min(minPorBlok[index], lista[i]);
+Â  Â  Â  Â  posGroup[i] = index;
+Â  Â  Â  Â  if(i % rootList == 0)
+        {
+Â  Â  Â  Â  Â  Â  valueFin[index] = i;
+Â  Â  Â  Â  Â  Â  index++;
+Â  Â  Â  Â  Â  Â  valueIni[index] = i + 1;
+Â  Â  Â  Â  Â  Â  minPorBlok[index] = oo;
+Â  Â  Â  Â  }
+Â  Â  }
+Â  Â  valueFin[index] = L;
+Â  Â  return;
 }
 int main(){
-    ios_base::sync_with_stdio(0); cin.tie(0);
-    //freopen(".in", "r", stdin);
+Â  Â  ios_base::sync_with_stdio(0); cin.tie(0);
+Â  Â  //freopen(".in", "r", stdin);
 
-    int oo = 106;
-    cin >> cases;
+
+Â  Â  cin >> cases;
     for(int c = 1; c <= cases; c ++)
     {
-       cin;
        int L, Q; cin >> L >> Q;
-       int rootList = sqrt(L);
-       for(int i = 1; i <= L; i++)
+       rootList = sqrt(L);
+Â  Â     for(int i = 1; i <= L; i++)
        {
-          cin >> lista[i];
+Â  Â    Â  Â  cin >> lista[i];
        }
-       build();
+Â  Â     build();
        cout << "Case " << c << ":\n"
-       for(int i = 1; i <= Q; i++)
+Â  Â     for(int i = 1; i <= Q; i++)
        {
-          int a, b; cin >> a >> b;
-          cout << query(a, b) << "\n";
-       }
-    }
-    return 0;
+Â  Â      Â  int a, b; cin >> a >> b;
+Â  Â    Â  Â  cout << query(a, b) << "\n";
+Â  Â  Â   }
+Â  Â  }
+Â  Â  return 0;
 }
 
 
+/*Given an array with N elements, indexed from 1 to N.
+Now you will be given some queries in the form I J, your task is to find the minimum value from index I to J.
+Input:
+      Input starts with an integer T (â‰¤ 5), denoting the number of test cases.
+      The first line of a case is a blank line.
+      The next line contains two integers N (1 â‰¤ N â‰¤ 105), q (1 â‰¤ q â‰¤ 50000).
+      The next line contains N space separated integers forming the array. There integers range in [0, 105].
+      The next q lines will contain a query which is in the form I J (1 â‰¤ I â‰¤ J â‰¤ N).
+Output:
+      For each test case, print the case number in a single line.
+      Then for each query you have to print a line containing the minimum value between index I and J.
 

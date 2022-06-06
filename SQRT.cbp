@@ -32,7 +32,18 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Unit filename="CountMultiples3.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MaximumSum.cpp">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="Potentiometers.cpp">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="minimum.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
