@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-int maxn = 10e5;
 
+const int maxn = 1e5 + 5;
 int L, Q, rootList;
 int max1SumPorBlok[maxn];
 int max2SumPorBlok[maxn];
@@ -34,7 +34,7 @@ void build(){
     {
         if(max1SumPorBlok[index] < lista[i])
         {
-            max2SumPorBlok[index] = max1SumPorBlok[index]
+            max2SumPorBlok[index] = max1SumPorBlok[index];
             max1SumPorBlok[index] = lista[i];
         }
         else if(max2SumPorBlok[index] < lista[i]){max2SumPorBlok[index] = lista[i];}
@@ -69,22 +69,27 @@ int query(int ini, int fin){
     // recorre los grupos intermedios
     while(posGroup[i] != posGroup[fin])
     {
-        mayor = max(mayor, max1SumPorBlok[ posGroup[i] ]);
         if(mayor1 < max1SumPorBlok[ posGroup[i] ])
         {
-            mayor2 = mayor1
+            mayor2 = mayor1;
             mayor1 = max1SumPorBlok[ posGroup[i] ];
         }
-        else if(mayor2 < max1SumPorBlok[ posGroup[i] ]){mayor2 = max1SumPorBlok[ posGroup[i] ];}
-        if(mayor2 < max2SumPorBlok[ posGroup[i] ]){mayor2 = max2SumPorBlok[ posGroup[i] ];}
-        i = ini[ posGroup[i] + 1 ]
+        else if(mayor2 < max1SumPorBlok[ posGroup[i] ])
+        {
+            mayor2 = max1SumPorBlok[ posGroup[i] ];
+        }
+        if(mayor2 < max2SumPorBlok[ posGroup[i] ])
+        {
+            mayor2 = max2SumPorBlok[ posGroup[i] ];
+        }
+        i = valueIni[ posGroup[i] + 1 ];
     }
     // recorre el ultimo grupo
     while(i <= fin)
     {
         if(mayor1 < lista[i])
         {
-            mayor2 = mayor1
+            mayor2 = mayor1;
             mayor1 = lista[i];
         }
         else if(mayor2 < lista[i]){mayor2 = lista[i];}
@@ -96,22 +101,25 @@ int main(){
     ios_base::sync_with_stdio(0); cin.tie(0);
     //freopen(".in", "r", stdin);
     cin >> L;
-    cin >> lista[i];
-    cin >> Q;
+    for(int i = 1; i <= L; i++)
+    {
+        cin >> lista[i];
+    }
     rootList = sqrt(L);
     build();
+    cin >> Q;
     string oper;
     int a, b;
-    cin >> oper >> a >> b;
     for(int i = 1; i <= Q; i++)
     {
+        cin >> oper >> a >> b;
         if(oper == "Q"){cout << query(a, b) << "\n";}
         if(oper == "U")
         {
-            update(a, b)
+            update(a, b);
         }
-        cin >> oper >> a >> b;
     }
+    cin;
     return 0;
 }
 

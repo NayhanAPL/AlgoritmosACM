@@ -110,3 +110,16 @@ int main(){
     }
     return 0;
 }
+
+
+/*Write a program to transform an array A[1], A[2], . . . , A[n] according to m instructions. Each instruction
+(L, R, v, p) means: First, calculate how many numbers from A[L] to A[R] (inclusive) are strictly less
+than v, call this answer k. Then, change the value of A[p] to u ∗ k/(R − L + 1), here we use integer
+division (i.e. ignoring fractional part).
+Input:
+      The first line of input contains three integer n, m, u (1 ≤ n ≤ 300, 000, 1 ≤ m ≤ 50, 000, 1 ≤ u ≤
+      1, 000, 000, 000). Each of the next n lines contains an integer A[i] (1 ≤ A[i] ≤ u). Each of the next
+      m lines contains an instruction consisting of four integers L, R, v, p (1 ≤ L ≤ R ≤ n, 1 ≤ v ≤ u,
+      1 ≤ p ≤ n).
+Output:
+      Print n lines, one for each integer, the final array.

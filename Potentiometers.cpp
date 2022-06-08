@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int maxn = 1e5 + 5;
+const int maxn = 1e5 + 5;
 int lista[maxn], sumPorBlok[maxn];
 int valueIni[maxn], valueFin[maxn], posGroup[maxn];
-int rootList;
+int rootList, L;
 
 void update(int pos, int val){
     int g = posGroup[pos];
@@ -47,7 +47,7 @@ int query(int ini, int fin){
     while(posGroup[i] != posGroup[fin])
     {
         suma += sumPorBlok[ posGroup[i] ];
-        i = ini[ posGroup[i] + 1 ];
+        i = valueIni[ posGroup[i] + 1 ];
     }
     // recorre el ultimo grupo
     while(i <= fin)
@@ -59,13 +59,13 @@ int query(int ini, int fin){
 int main(){
     ios_base::sync_with_stdio(0); cin.tie(0);
     int cases = 1;
-    int L; cin >> L;
+    cin >> L;
     while(L != 0)
     {
         rootList = sqrt(L);
         for(int i = 1; i <= L; i++)
         {
-        cin >> lista[i];
+            cin >> lista[i];
         }
         build();
         cout << "Case " << cases << ":\n";
@@ -74,10 +74,13 @@ int main(){
         while(oper != "END")
         {
             if(oper == "M"){cout << query(a, b) << "\n";}
-            if(oper == "S"){update(a, b);} 
+            if(oper == "S")
+            {
+                update(a, b);
+            }
             cin >> oper >> a >> b;
+            cout << oper;
         }
-        cout << "";
         cin >> L;
         cases ++;
     }
