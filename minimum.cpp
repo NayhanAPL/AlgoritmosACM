@@ -5,7 +5,7 @@ int maxn = 1e5 + 5;
 int lista[maxn], minPorBlok[maxn];
 int valueIni[maxn], valueFin[maxn], posGroup[maxn];
 int oo = maxn;
-int rootList;
+int L, Q, rootList;
 
 int query(int ini, int fin){
     int menor = oo;
@@ -44,12 +44,10 @@ void build(){
 int main(){
     ios_base::sync_with_stdio(0); cin.tie(0);
     //freopen(".in", "r", stdin);
-
-
-    cin >> cases;
+    int cases; cin >> cases;
     for(int c = 1; c <= cases; c ++)
     {
-       int L, Q; cin >> L >> Q;
+       cin >> L >> Q;
        rootList = sqrt(L);
        for(int i = 1; i <= L; i++)
        {

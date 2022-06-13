@@ -70,16 +70,16 @@ int main(){
         build();
         cout << "Case " << cases << ":\n";
         int a, b;
-        string oper; cin >> oper >> a >> b;
+        string oper; cin >> oper;
         while(oper != "END")
         {
+            cin >> a >> b;
             if(oper == "M"){cout << query(a, b) << "\n";}
             if(oper == "S")
             {
                 update(a, b);
             }
-            cin >> oper >> a >> b;
-            cout << oper;
+            cin >> oper;
         }
         cin >> L;
         cases ++;

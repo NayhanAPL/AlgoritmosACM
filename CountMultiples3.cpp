@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int maxn = 1e5 + 5;
+const int maxn = 1e5 + 5;
 int lista[maxn], mul3PorBlok[maxn], sumaGrupal[maxn];
 int valueIni[maxn], valueFin[maxn], posGroup[maxn];
 int L, Q;
@@ -11,7 +11,7 @@ void update(int ini, int fin){
     int i = ini;
     int g;
     // recorre el primer grupo
-    while(posGroup[i] == posGroup[ini] && posGroup[i] != posGroup[fin])
+    while(posGroup[i] == posGroup[ini] && posGroup[i] != posGroup[fin])
     {
         lista[i] ++;
         g = posGroup[i];
@@ -22,14 +22,14 @@ void update(int ini, int fin){
         i ++;
     }
     // recorre los grupos intermedios
-    while(posGroup[i] != posGroup[fin])
+    while(posGroup[i] != posGroup[fin])
     {
         g = posGroup[i];
         sumaGrupal[g] ++;
         i ++;
     }
     // recorre el ultimo grupo
-    while(i <= fin)
+    while(i <= fin)
     {
         lista[i] ++;
         g = posGroup[i];
@@ -39,8 +39,6 @@ void update(int ini, int fin){
         }
         i ++;
     }
-
-    return menor;
     return;
 }
 void build(){
@@ -50,7 +48,7 @@ void build(){
     for(int i = 0; i < L; i++)
     {
         posGroup[i] = index;
-        if(i % rootList == 0)
+        if(i + 1 % rootList == 0)
         {
             valueFin[index] = i;
             index++;
@@ -90,7 +88,7 @@ int query(int ini, int fin){
             sumaGrupal[posGroup[i]] = 0;
         }
         cont += mul3PorBlok[posGroup[i]];
-        i = ini[ posGroup[i] + 1 ];
+        i = valueIni[ posGroup[i] + 1 ];
     }
     // recorre el ultimo grupo
     while(i <= fin)
@@ -106,7 +104,7 @@ int query(int ini, int fin){
 int main(){
     ios_base::sync_with_stdio(0); cin.tie(0);
     //freopen(".in", "r", stdin);
-    cin >> cases;
+    int cases; cin >> cases;
     for(int c = 1; c <= cases; c ++)
     {
         cin >> L >> Q;
@@ -128,12 +126,10 @@ int main(){
             {
                 update(a, b);
             }
-            cin >> oper >> a >> b;
         }
     }
 return 0;
 }
-
 
 /*You have an array with n elements which is indexed from 0 to n - 1. Initially all elements are zero.
 Now you have to deal with two types of operations:
